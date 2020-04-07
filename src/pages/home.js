@@ -3,23 +3,17 @@ import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 
 import Scream from "../components/Scream.js";
+import Profile from "../components/Profile.js";
 
-class Home extends Component {
+class home extends Component {
   state = {
     screams: null,
   };
-
-  // fetchData = async () => {
-  //   const res = await fetch("/screams");
-  //   const data = await res.json();
-  //   console.log(data);
-  // };
 
   componentDidMount() {
     axios
       .get("/screams")
       .then((res) => {
-        console.log(res.data);
         this.setState({ screams: res.data });
       })
       .catch((err) => console.log(err));
@@ -27,7 +21,9 @@ class Home extends Component {
 
   render() {
     let recentScreamsMarkup = this.state.screams ? (
-      this.state.screams.map((scream) => <Scream scream={scream} />)
+      this.state.screams.map((scream) => (
+        <Scream key={scream.screamId} scream={scream} />
+      ))
     ) : (
       <p>Loading..</p>
     );
@@ -38,11 +34,11 @@ class Home extends Component {
           {recentScreamsMarkup}
         </Grid>
         <Grid item sm={4} xs={12}>
-          <p>Profile..</p>
+          <Profile />
         </Grid>
       </Grid>
     );
   }
 }
 
-export default Home;
+export default home;
