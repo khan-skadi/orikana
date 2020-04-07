@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.9",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -25,6 +28,7 @@
       "not dead",
       "not op_mini all"
     ],
+    "proxy": "https://europe-west1-orikana-3af70.cloudfunctions.net/api",
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
