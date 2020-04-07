@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 
-class home extends Component {
+import Scream from "../components/Scream.js";
+
+class Home extends Component {
   state = {
     screams: null,
   };
+
+  // fetchData = async () => {
+  //   const res = await fetch("/screams");
+  //   const data = await res.json();
+  //   console.log(data);
+  // };
 
   componentDidMount() {
     axios
@@ -19,7 +27,7 @@ class home extends Component {
 
   render() {
     let recentScreamsMarkup = this.state.screams ? (
-      this.state.screams.map((scream) => <p>{scream.body}</p>)
+      this.state.screams.map((scream) => <Scream scream={scream} />)
     ) : (
       <p>Loading..</p>
     );
@@ -37,4 +45,4 @@ class home extends Component {
   }
 }
 
-export default home;
+export default Home;

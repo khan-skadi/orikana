@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "./App.css";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import "./App.css";
 
 // Components
 import Navbar from "./components/Navbar.js";
 
 // Pages
-import home from "./pages/home.js";
+import Home from "./pages/Home.js";
 import login from "./pages/login.js";
 import signup from "./pages/signup.js";
 
@@ -41,7 +41,7 @@ class App extends Component {
             <Navbar />
             <div className="container">
               <Switch>
-                <Route exact path="/" component={home} />
+                <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={login} />
                 <Route exact path="/signup" component={signup} />
               </Switch>
