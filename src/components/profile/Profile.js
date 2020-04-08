@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser, uploadImage } from "../redux/actions/userActions.js";
+import { logoutUser, uploadImage } from "../../redux/actions/userActions.js";
 import EditDetails from "./EditDetails.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import dayjs from "dayjs";
-import MyButton from "../util/MyButton.js";
+import MyButton from "../../util/MyButton.js";
 
 // MUI stuff
 import Paper from "@material-ui/core/Paper";

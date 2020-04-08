@@ -1,9 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { editUserDetails } from "../redux/actions/userActions.js";
+import { editUserDetails } from "../../redux/actions/userActions.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../util/MyButton.js";
+import MyButton from "../../util/MyButton.js";
 
 // MUI stuff
 import Button from "@material-ui/core/Button";
