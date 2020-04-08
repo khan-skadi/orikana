@@ -11,7 +11,7 @@ import store from "./redux/store.js";
 import { SET_AUTHENTICATED } from "./redux/types.js";
 import { logoutUser, getUserData } from "./redux/actions/userActions.js";
 // Components
-import Navbar from "./components/Navbar.js";
+import Navbar from "./components/layout/Navbar.js";
 import AuthRoute from "./util/AuthRoute.js";
 // Pages
 import home from "./pages/home.js";
