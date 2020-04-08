@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 
 import Scream from "../components/scream/Scream.js";
 import Profile from "../components/profile/Profile.js";
+import ScreamSkeleton from "../util/ScreamSkeleton.js";
 
 class home extends Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class home extends Component {
     let recentScreamsMarkup = !loading ? (
       screams.map((scream) => <Scream key={scream.screamId} scream={scream} />)
     ) : (
-      <p>Loading..</p>
+      <ScreamSkeleton />
     );
 
     return (

@@ -17,6 +17,10 @@ import AuthRoute from "./util/AuthRoute.js";
 import home from "./pages/home.js";
 import login from "./pages/login.js";
 import signup from "./pages/signup.js";
+import user from "./pages/user.js";
+
+axios.defaults.baseURL =
+  "https://europe-west1-orikana-3af70.cloudfunctions.net/api"; // Needed for production / deployment
 
 const token = localStorage.FBIdToken;
 if (token) {
@@ -43,6 +47,12 @@ class App extends Component {
                 <Route exact path="/" component={home} />
                 <AuthRoute exact path="/login" component={login} />
                 <AuthRoute exact path="/signup" component={signup} />
+                <Route exact path="/users/:handle" component={user} />
+                <Route
+                  exact
+                  path="/users/:handle/scream/:screamId"
+                  component={user}
+                />
               </Switch>
             </div>
           </Router>

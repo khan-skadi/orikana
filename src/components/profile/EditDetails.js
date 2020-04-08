@@ -25,7 +25,6 @@ const styles = (theme) => ({
 
 class EditDetails extends Component {
   static propTypes = {
-    prop: PropTypes,
     editUserDetails: PropTypes.func.isRequired,
     classes: PropTypes.object.isRequired,
   };

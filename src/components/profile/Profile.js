@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { logoutUser, uploadImage } from "../../redux/actions/userActions.js";
 import EditDetails from "./EditDetails.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import dayjs from "dayjs";
 import MyButton from "../../util/MyButton.js";
+import ProfileSkeleton from "../../util/ProfileSkeleton.js";
 
 // MUI stuff
 import Paper from "@material-ui/core/Paper";
@@ -27,7 +28,6 @@ const styles = (theme) => ({
 
 class Profile extends Component {
   static propTypes = {
-    prop: PropTypes,
     user: PropTypes.object.isRequired,
     classes: PropTypes.object.isRequired,
     logoutUser: PropTypes.func.isRequired,
@@ -37,7 +37,6 @@ class Profile extends Component {
   handleImageChange = (e) => {
     const image = e.target.files[0];
     const formData = new FormData();
-
     formData.append("image", image, image.name);
     this.props.uploadImage(formData);
   };
@@ -145,7 +144,7 @@ class Profile extends Component {
         </Paper>
       )
     ) : (
-      <p>Loading..</p>
+      <ProfileSkeleton />
     );
 
     return profileMarkup;

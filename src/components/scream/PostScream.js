@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { postScream } from "../../redux/actions/dataActions.js";
+import { postScream, clearErrors } from "../../redux/actions/dataActions.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import MyButton from "../../util/MyButton.js";
@@ -41,7 +41,7 @@ class PostScream extends Component {
     errors: {},
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({
         errors: nextProps.UI.errors,
@@ -145,6 +145,6 @@ const mapStateToProps = (state) => ({
   UI: state.UI,
 });
 
-export default connect(mapStateToProps, { postScream })(
+export default connect(mapStateToProps, { postScream, clearErrors })(
   withStyles(styles)(PostScream)
 );
