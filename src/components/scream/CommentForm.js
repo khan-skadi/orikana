@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { submitComment } from "../../redux/actions/dataActions.js";
-
-// MUI stuff
+// MUI Stuff
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+// Redux stuff
+import { connect } from "react-redux";
+import { submitComment } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -28,12 +28,11 @@ class CommentForm extends Component {
     }
   }
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     this.props.submitComment(this.props.screamId, { body: this.state.body });
   };
 
@@ -67,7 +66,6 @@ class CommentForm extends Component {
         <hr className={classes.visibleSeparator} />
       </Grid>
     ) : null;
-
     return commentFormMarkup;
   }
 }
@@ -76,8 +74,8 @@ CommentForm.propTypes = {
   submitComment: PropTypes.func.isRequired,
   UI: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired,
-  authenticated: PropTypes.bool.isRequired,
   screamId: PropTypes.string.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -85,11 +83,6 @@ const mapStateToProps = (state) => ({
   authenticated: state.user.authenticated,
 });
 
-const mapActionsToProps = {
-  submitComment,
-};
-
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(withStyles(styles)(CommentForm));
+export default connect(mapStateToProps, { submitComment })(
+  withStyles(styles)(CommentForm)
+);

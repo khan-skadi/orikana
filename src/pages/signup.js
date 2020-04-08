@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import AppIcon from "../images/icon.png";
-// MUI stuff
+import { Link } from "react-router-dom";
+
+// MUI Stuff
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -11,7 +12,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 // Redux stuff
 import { connect } from "react-redux";
-import { signupUser } from "../redux/actions/userActions.js";
+import { signupUser } from "../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -28,33 +29,29 @@ class signup extends Component {
       errors: {},
     };
   }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ loading: true });
-
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      loading: true,
+    });
     const newUserData = {
       email: this.state.email,
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
       handle: this.state.handle,
     };
-
     this.props.signupUser(newUserData, this.props.history);
   };
-
-  handleChange = (e) => {
+  handleChange = (event) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
-
   render() {
     const {
       classes,
@@ -68,7 +65,7 @@ class signup extends Component {
         <Grid item sm>
           <img src={AppIcon} alt="monkey" className={classes.image} />
           <Typography variant="h2" className={classes.pageTitle}>
-            Signup
+            SignUp
           </Typography>
           <form noValidate onSubmit={this.handleSubmit}>
             <TextField
@@ -98,7 +95,7 @@ class signup extends Component {
             <TextField
               id="confirmPassword"
               name="confirmPassword"
-              type="Password"
+              type="password"
               label="Confirm Password"
               className={classes.textField}
               helperText={errors.confirmPassword}
@@ -131,14 +128,14 @@ class signup extends Component {
               className={classes.button}
               disabled={loading}
             >
-              Signup
+              SignUp
               {loading && (
                 <CircularProgress size={30} className={classes.progress} />
               )}
             </Button>
             <br />
             <small>
-              Already have an account ? login <Link to="/login">here</Link>
+              Already have an account ? Login <Link to="/login">here</Link>
             </small>
           </form>
         </Grid>

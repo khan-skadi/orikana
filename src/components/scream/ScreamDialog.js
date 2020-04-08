@@ -1,26 +1,25 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { getScream, clearErrors } from "../../redux/actions/dataActions";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../../util/MyButton.js";
+import MyButton from "../../util/MyButton";
+import LikeButton from "./LikeButton";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 import dayjs from "dayjs";
-import LikeButton from "./LikeButton.js";
-import Comments from "./Comments.js";
-import CommentForm from "./CommentForm.js";
-
-// MUI stuff
-import Grid from "@material-ui/core/Grid";
+import { Link } from "react-router-dom";
+// MUI Stuff
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-
 // Icons
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import ChatIcon from "@material-ui/icons/Chat";
+// Redux stuff
+import { connect } from "react-redux";
+import { getScream, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -54,13 +53,11 @@ class ScreamDialog extends Component {
     oldPath: "",
     newPath: "",
   };
-
   componentDidMount() {
     if (this.props.openDialog) {
       this.handleOpen();
     }
   }
-
   handleOpen = () => {
     let oldPath = window.location.pathname;
 
@@ -74,7 +71,6 @@ class ScreamDialog extends Component {
     this.setState({ open: true, oldPath, newPath });
     this.props.getScream(this.props.screamId);
   };
-
   handleClose = () => {
     window.history.pushState(null, null, this.state.oldPath);
     this.setState({ open: false });
@@ -102,16 +98,16 @@ class ScreamDialog extends Component {
         <CircularProgress size={200} thickness={2} />
       </div>
     ) : (
-      <Grid container spacing={10}>
+      <Grid container spacing={16}>
         <Grid item sm={5}>
           <img src={userImage} alt="Profile" className={classes.profileImage} />
         </Grid>
         <Grid item sm={7}>
           <Typography
             component={Link}
-            to={`/users/${userHandle}`}
             color="primary"
             variant="h5"
+            to={`/users/${userHandle}`}
           >
             @{userHandle}
           </Typography>
@@ -126,14 +122,13 @@ class ScreamDialog extends Component {
           <MyButton tip="comments">
             <ChatIcon color="primary" />
           </MyButton>
-          <span>{commentCount} Comments</span>
+          <span>{commentCount} comments</span>
         </Grid>
         <hr className={classes.visibleSeparator} />
         <CommentForm screamId={screamId} />
         <Comments comments={comments} />
       </Grid>
     );
-
     return (
       <Fragment>
         <MyButton

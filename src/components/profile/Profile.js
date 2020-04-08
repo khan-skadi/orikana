@@ -1,55 +1,44 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logoutUser, uploadImage } from "../../redux/actions/userActions.js";
-import EditDetails from "./EditDetails.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import MyButton from "../../util/MyButton.js";
-import ProfileSkeleton from "../../util/ProfileSkeleton.js";
-
+import EditDetails from "./EditDetails";
+import MyButton from "../../util/MyButton";
+import ProfileSkeleton from "../../util/ProfileSkeleton";
 // MUI stuff
-import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import MuiLink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
-
+import MuiLink from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
 // Icons
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
 import CalendarToday from "@material-ui/icons/CalendarToday";
 import EditIcon from "@material-ui/icons/Edit";
 import KeyboardReturn from "@material-ui/icons/KeyboardReturn";
+//Redux
+import { connect } from "react-redux";
+import { logoutUser, uploadImage } from "../../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
 });
 
 class Profile extends Component {
-  static propTypes = {
-    user: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
-    logoutUser: PropTypes.func.isRequired,
-    uploadImage: PropTypes.func.isRequired,
-  };
-
-  handleImageChange = (e) => {
-    const image = e.target.files[0];
+  handleImageChange = (event) => {
+    const image = event.target.files[0];
     const formData = new FormData();
     formData.append("image", image, image.name);
     this.props.uploadImage(formData);
   };
-
-  handleEditImage = () => {
+  handleEditPicture = () => {
     const fileInput = document.getElementById("imageInput");
     fileInput.click();
   };
-
   handleLogout = () => {
     this.props.logoutUser();
   };
-
   render() {
     const {
       classes,
@@ -65,7 +54,7 @@ class Profile extends Component {
         <Paper className={classes.paper}>
           <div className={classes.profile}>
             <div className="image-wrapper">
-              <img src={imageUrl} className="profile-image" alt="profile" />
+              <img src={imageUrl} alt="profile" className="profile-image" />
               <input
                 type="file"
                 id="imageInput"
@@ -73,8 +62,8 @@ class Profile extends Component {
                 onChange={this.handleImageChange}
               />
               <MyButton
-                tip="Edit profile image"
-                onClick={this.handleEditImage}
+                tip="Edit profile picture"
+                onClick={this.handleEditPicture}
                 btnClassName="button"
               >
                 <EditIcon color="primary" />
@@ -156,6 +145,13 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = { logoutUser, uploadImage };
+
+Profile.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  uploadImage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+};
 
 export default connect(
   mapStateToProps,

@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { editUserDetails } from "../../redux/actions/userActions.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../../util/MyButton.js";
-
-// MUI stuff
+import MyButton from "../../util/MyButton";
+// Redux stuff
+import { connect } from "react-redux";
+import { editUserDetails } from "../../redux/actions/userActions";
+// MUI Stuff
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-
 // Icons
 import EditIcon from "@material-ui/icons/Edit";
 
@@ -24,22 +23,12 @@ const styles = (theme) => ({
 });
 
 class EditDetails extends Component {
-  static propTypes = {
-    editUserDetails: PropTypes.func.isRequired,
-    classes: PropTypes.object.isRequired,
-  };
   state = {
     bio: "",
     website: "",
     location: "",
     open: false,
   };
-
-  componentDidMount() {
-    const { credentials } = this.props;
-    this.mapUserDetailsToState(credentials);
-  }
-
   mapUserDetailsToState = (credentials) => {
     this.setState({
       bio: credentials.bio ? credentials.bio : "",
@@ -47,22 +36,23 @@ class EditDetails extends Component {
       location: credentials.location ? credentials.location : "",
     });
   };
-
   handleOpen = () => {
     this.setState({ open: true });
     this.mapUserDetailsToState(this.props.credentials);
   };
-
   handleClose = () => {
     this.setState({ open: false });
   };
+  componentDidMount() {
+    const { credentials } = this.props;
+    this.mapUserDetailsToState(credentials);
+  }
 
-  handleChange = (e) => {
+  handleChange = (event) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
-
   handleSubmit = () => {
     const userDetails = {
       bio: this.state.bio,
@@ -72,13 +62,12 @@ class EditDetails extends Component {
     this.props.editUserDetails(userDetails);
     this.handleClose();
   };
-
   render() {
     const { classes } = this.props;
     return (
       <Fragment>
         <MyButton
-          tip="Edit details"
+          tip="Edit Details"
           onClick={this.handleOpen}
           btnClassName={classes.button}
         >
@@ -94,33 +83,33 @@ class EditDetails extends Component {
           <DialogContent>
             <form>
               <TextField
-                classname={classes.textField}
                 name="bio"
-                type="text"
+                tpye="text"
                 label="Bio"
                 multiline
                 rows="3"
                 placeholder="A short bio about yourself"
+                className={classes.textField}
                 value={this.state.bio}
                 onChange={this.handleChange}
                 fullWidth
               />
               <TextField
-                classname={classes.textField}
                 name="website"
-                type="text"
+                tpye="text"
                 label="Website"
-                placeholder="Your personal/professional website"
+                placeholder="Your personal/professinal website"
+                className={classes.textField}
                 value={this.state.website}
                 onChange={this.handleChange}
                 fullWidth
               />
               <TextField
-                classname={classes.textField}
                 name="location"
-                type="text"
+                tpye="text"
                 label="Location"
                 placeholder="Where you live"
+                className={classes.textField}
                 value={this.state.location}
                 onChange={this.handleChange}
                 fullWidth
@@ -132,7 +121,7 @@ class EditDetails extends Component {
               Cancel
             </Button>
             <Button onClick={this.handleSubmit} color="primary">
-              Submit
+              Save
             </Button>
           </DialogActions>
         </Dialog>
@@ -140,6 +129,11 @@ class EditDetails extends Component {
     );
   }
 }
+
+EditDetails.propTypes = {
+  editUserDetails: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   credentials: state.user.credentials,

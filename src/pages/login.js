@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import AppIcon from "../images/icon.png";
+import { Link } from "react-router-dom";
 
-// Redux stuff
-import { connect } from "react-redux";
-import { loginUser } from "../redux/actions/userActions.js";
-
-// MUI stuff
+// MUI Stuff
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
+// Redux stuff
+import { connect } from "react-redux";
+import { loginUser } from "../redux/actions/userActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -28,28 +27,24 @@ class login extends Component {
       errors: {},
     };
   }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     const userData = {
       email: this.state.email,
       password: this.state.password,
     };
     this.props.loginUser(userData, this.props.history);
   };
-
-  handleChange = (e) => {
+  handleChange = (event) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
-
   render() {
     const {
       classes,
@@ -109,7 +104,7 @@ class login extends Component {
             </Button>
             <br />
             <small>
-              Dont have an account ? sign up <Link to="/signup">here</Link>
+              dont have an account ? sign up <Link to="/signup">here</Link>
             </small>
           </form>
         </Grid>

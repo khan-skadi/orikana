@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import NoImg from "../images/icon.png";
-
+import NoImg from "../images/no-img.png";
 // MUI
 import Paper from "@material-ui/core/Paper";
-
 // Icons
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
@@ -35,7 +33,6 @@ const styles = (theme) => ({
 
 const ProfileSkeleton = (props) => {
   const { classes } = props;
-
   return (
     <Paper className={classes.paper}>
       <div className={classes.profile}>

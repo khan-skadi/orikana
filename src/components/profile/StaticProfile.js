@@ -1,15 +1,12 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import dayjs from "dayjs";
-
-// MUI stuff
+import { Link } from "react-router-dom";
+// MUI
 import MuiLink from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-
 // Icons
 import LocationOn from "@material-ui/icons/LocationOn";
 import LinkIcon from "@material-ui/icons/Link";
@@ -29,7 +26,7 @@ const StaticProfile = (props) => {
     <Paper className={classes.paper}>
       <div className={classes.profile}>
         <div className="image-wrapper">
-          <img src={imageUrl} className="profile-image" alt="profile" />
+          <img src={imageUrl} alt="profile" className="profile-image" />
         </div>
         <hr />
         <div className="profile-details">
@@ -73,11 +70,4 @@ StaticProfile.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(StaticProfile));
+export default withStyles(styles)(StaticProfile);

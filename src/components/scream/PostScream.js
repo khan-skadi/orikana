@@ -1,21 +1,19 @@
 import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { postScream, clearErrors } from "../../redux/actions/dataActions.js";
 import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
-import MyButton from "../../util/MyButton.js";
-
-// MUI stuff
+import MyButton from "../../util/MyButton";
+// MUI Stuff
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
-// Icons
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
+// Redux stuff
+import { connect } from "react-redux";
+import { postScream, clearErrors } from "../../redux/actions/dataActions";
 
 const styles = (theme) => ({
   ...theme.spreadThis,
@@ -40,7 +38,6 @@ class PostScream extends Component {
     body: "",
     errors: {},
   };
-
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({
@@ -48,36 +45,29 @@ class PostScream extends Component {
       });
     }
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ body: "" });
-      this.setState({ open: false, errors: {} });
+      this.setState({ body: "", open: false, errors: {} });
     }
   }
-
   handleOpen = () => {
     this.setState({ open: true });
   };
-
   handleClose = () => {
     this.props.clearErrors();
     this.setState({ open: false, errors: {} });
   };
-
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     this.props.postScream({ body: this.state.body });
   };
-
   render() {
     const { errors } = this.state;
     const {
       classes,
       UI: { loading },
     } = this.props;
-
     return (
       <Fragment>
         <MyButton onClick={this.handleOpen} tip="Post a Scream!">
@@ -102,10 +92,10 @@ class PostScream extends Component {
               <TextField
                 name="body"
                 type="text"
-                label="Scream !"
+                label="SCREAM!!"
                 multiline
                 rows="3"
-                placeholder="Scream at your fellow friends"
+                placeholder="Scream at your fellow apes"
                 error={errors.body ? true : false}
                 helperText={errors.body}
                 className={classes.textField}
@@ -137,8 +127,8 @@ class PostScream extends Component {
 
 PostScream.propTypes = {
   postScream: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired,
   clearErrors: PropTypes.func.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
