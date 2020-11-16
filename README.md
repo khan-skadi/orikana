@@ -1,4 +1,4 @@
-# Orikana aka socialape
+# Orikana
 
 ## How to use
 
