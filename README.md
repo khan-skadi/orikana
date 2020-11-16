@@ -1,5 +1,14 @@
 # Orikana aka socialape
 
+## How to use
+
+```
+Inside the project you can run:
+```
+
+`npm install`<br />
+`npm start`
+
 ## Description
 
 - Dashboard with posts from users.
@@ -17,3 +26,4 @@
 - JWT
 - Redux, Redux-thunk
 - Json Web Token
+- Material UI
